@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<script>
+    var app = angular.module("myApp", ["ngRoute"]);
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/helloworld", {
+        templateUrl : "helloworld.html",
+        controller: "tableController"
+    })
+    .when("/shoppinglist", {
+        templateUrl : "myshoppinglist.html",
+        controller: "myCtrl"
+    })
+    .when("/printtable", {
+        templateUrl : "printtable.html",
+        controller: "tableController"
+    });
+    
+});
+app.controller('tableController', function($scope, $http) {
+    $http.get("http://services.groupkt.com/country/get/all")
+    .then(function (response) {
+        $scope.names=response.data.RestResponse.result;
+        console.log($scope.names);
+     });
+});
+app.controller('hellocontroller', function($scope) {
+    $scope.greeting = "Hello World";
+});
+app.controller("myCtrl", function($scope) {
+    $scope.products = ["Milk", "Bread", "Cheese"];
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) {return;}
+        if ($scope.products.indexOf($scope.addMe) == -1) {
+            $scope.products.push($scope.addMe);
+        } else {
+            $scope.errortext = "The item is already in your shopping list.";
+        }
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";    
+        $scope.products.splice(x, 1);
+    }
+});
+</script>
+<body ng-app="myApp" >
+
+<p><a href="#!">Main</a></p>
+
+<a href="#!helloworld">Hello World</a>
+<a href="#!shoppinglist">Shopping List</a>
+<a href="#!printtable">Print Table</a>
+
+<div ng-view></div>
+
+
+<p>This is the Main page Click on the Links to View Other pages Contents</p>
+</body>
+</html>

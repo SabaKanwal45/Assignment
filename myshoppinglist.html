@@ -1,29 +1,9 @@
 <!DOCTYPE html>
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <body>
 
-<script>
-var app = angular.module("myShoppingList", []); 
-app.controller("myCtrl", function($scope) {
-    $scope.products = ["Milk", "Bread", "Cheese"];
-    $scope.addItem = function () {
-        $scope.errortext = "";
-        if (!$scope.addMe) {return;}
-        if ($scope.products.indexOf($scope.addMe) == -1) {
-            $scope.products.push($scope.addMe);
-        } else {
-            $scope.errortext = "The item is already in your shopping list.";
-        }
-    }
-    $scope.removeItem = function (x) {
-        $scope.errortext = "";    
-        $scope.products.splice(x, 1);
-    }
-});
-</script>
 
-<div ng-app="myShoppingList" ng-cloak ng-controller="myCtrl"  style="max-width:400px;">
+<div style="max-width:400px;">
   <header >
     <h3>My Shopping List</h3>
   </header>
