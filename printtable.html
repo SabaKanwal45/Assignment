@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+<script src="tableController.js"></script>
+
+<div ng-app="myTable" ng-cloak ng-controller="tableController"  style="max-width:400px;">
+    <table id="table">
+        <tr>
+            <th>Country Name</th>
+            <th>alpha2_code</th> 
+            <th>alpha3_code</th>
+        <tr>
+        <tr ng-repeat="x in names">
+            <td>{{ x.name }}</td>
+            <td>{{ x.alpha2_code }}</td>
+            <td>{{ x.alpha3_code }}</td>
+        </tr>
+
+    </table>
+</div>
+
+</body>
+</html>
